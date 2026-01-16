@@ -1,6 +1,8 @@
 import React from "react";
-import gsap from "gsap"
-useGSAP
+import gsap from "gsap"; // 1. Import the core gsap object
+import { useGSAP } from "@gsap/react"; // 2. Fix package name
+
+
 
 const Home = () => {
   const herodocimg = [
@@ -15,6 +17,48 @@ const Home = () => {
     { id: 3, img: "./heropatient3.webp" },
   ];
 
+useGSAP(() => {
+  const tl = gsap.timeline();
+
+  // Animate the left elements (Card and Heading) together with a stagger
+  tl.from(".leftelem", {
+    y: 50,
+    opacity: 0,
+    duration: 2,
+    stagger: 0.2, // This makes them come in one after another
+    ease: "power3.out",
+  });
+  
+  // Animate the Search Box slightly after the text
+  tl.from(".leftsearchbox", {
+    y: 30,
+    opacity: 0,
+    duration: 1,
+    ease: "power3.out",
+  }, "-=0.4"); // Starts 0.4 seconds before the previous animation ends
+  
+  // Animate the Right elements (Card and Heading) together with a stagger
+  gsap.from(".righthero", {
+    y: 70,
+    opacity: 0,
+    duration: 2,
+    stagger: 0.2, // This makes them come in one after another
+    ease: "power3.out",
+  });
+
+  // Floating Gravity Boxes (Infinite)
+  gsap.to(".floatbox", {
+    y: -20,
+    duration: 2,
+    repeat: -1,
+    yoyo: true,
+    ease: "power1.inOut",
+    stagger: {
+      each: 0.5,
+      from: "random"
+    }
+  });
+});
 
   return (
     <div className="bg-[#e4efff] h-[42vh] md:h-screen relative px-4 md:px-10 lg:px-20 py-8 overflow-hidden">
@@ -35,7 +79,7 @@ const Home = () => {
         {/* LEFT HERO: Text & Appointment Card */}
         <div className="lefthero flex flex-col items-center md:items-start gap-8 order-2 md:order-1">
           {/* Appointment Card */}
-          <div className="bg-white p-3 sm:p-4 rounded-full shadow-md flex items-center justify-center gap-4 w-fit border border-gray-100">
+          <div className="leftelem bg-white p-3 sm:p-4 rounded-full shadow-md flex items-center justify-center gap-4 w-fit border border-gray-100">
             <div className="flex items-center pl-3">
               {herodocimg.map((item) => (
                 <img
@@ -67,7 +111,7 @@ const Home = () => {
           </div>
 
           {/* Hero Heading */}
-          <h1 className="text-2xl md:text-3xl lg:text-5xl text-nowrap font-bold text-center md:text-left leading-tight">
+          <h1 className="leftelem text-2xl md:text-3xl lg:text-5xl text-nowrap font-bold text-center md:text-left leading-tight">
             Discover Health: Find Your <br className="hidden md:block" />
             <span className="flex items-center justify-center md:justify-start gap-3 mt-2">
               Trusted
@@ -80,7 +124,7 @@ const Home = () => {
             </span>
           </h1>
           {/* Search Box */}
-          <div className="w-[70vw] md:w-[55vw] max-w-5xl mx-auto md:mt-10">
+          <div className="leftelem w-[70vw] md:w-[55vw] max-w-5xl mx-auto md:mt-10">
             <div className="bg-white rounded-2xl md:rounded-full border-2 border-[#0ea5e9] p-4 flex flex-col md:flex-row items-center shadow-sm">
               {/* Section 1: Search Input */}
               <div className="flex-[2] flex items-center px-4 gap-3">
@@ -116,7 +160,7 @@ const Home = () => {
         </div>
 
         {/* RIGHT HERO: Overlapping Doctor Images */}
-        <div className="righthero ml-27 relative hidden md:flex items-end justify-center order-1 md:order-2 w-full h-full min-h-[500px]">
+        <div className="righthero ml-27 relative hidden md:flex items-end -mt-25 justify-center order-1 md:order-2 w-full h-full min-h-[500px]">
           {/* The Background Shape */}
           <img
             className="w-[85%] md:w-[80%] h-auto max-w-lg object-contain"
