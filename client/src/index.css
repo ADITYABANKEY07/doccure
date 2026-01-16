@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+:root {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Optional: Ensure headings use the heavier weights you imported */
+h1, h2, h3 {
+  font-weight: 700;
+}
+
+@theme {
+  --color-primary: #0E82FD;
+  --color-secondary: #06AED4;
+}

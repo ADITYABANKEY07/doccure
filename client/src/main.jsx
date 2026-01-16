@@ -1,0 +1,15 @@
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
+import { BrowserRouter } from "react-router-dom"
+// --- Poppins Imports ---
+import "@fontsource/poppins/400.css"; // Regular
+import "@fontsource/poppins/600.css"; // Semi-Bold
+import "@fontsource/poppins/700.css"; // Bold
+
+createRoot(document.getElementById('root')).render(
+  <BrowserRouter>
+    <App/>
+  </BrowserRouter>
+)
