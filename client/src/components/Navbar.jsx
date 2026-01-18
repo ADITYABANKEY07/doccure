@@ -32,7 +32,7 @@ const Navbar = () => {
 
         <div className="flex gap-4 text-white">
           <Link
-            className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-cyan-400 px-5 py-2 rounded-full"
+            className="flex items-center gap-2 bg-gradient-to-r from-primary to-secondary px-5 py-2 rounded-full"
             to="/login"
           >
             <LockKeyhole size={18} /> Login

@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import gsap from "gsap";
-import {ChevronLeft, ChevronRight} from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -28,9 +28,22 @@ const Specialization = () => {
     const text = card.querySelector("h3");
 
     const tl = gsap.timeline();
-    
-    tl.to(card, { backgroundColor: "#2563eb", borderColor: "#2563eb", duration: 0.3 })
-      .to(iconContainer, { rotateY: 180, backgroundColor: "rgba(255,255,255,0.2)", duration: 0.4, ease: "back.out(1.7)" }, 0)
+
+    tl.to(card, {
+      backgroundColor: "#2563eb",
+      borderColor: "#2563eb",
+      duration: 0.3,
+    })
+      .to(
+        iconContainer,
+        {
+          rotateY: 180,
+          backgroundColor: "rgba(255,255,255,0.2)",
+          duration: 0.4,
+          ease: "back.out(1.7)",
+        },
+        0,
+      )
       .to(icon, { filter: "brightness(0) invert(1)", duration: 0.3 }, 0)
       .to(text, { color: "#ffffff", duration: 0.3 }, 0);
   };
@@ -43,8 +56,16 @@ const Specialization = () => {
 
     const tl = gsap.timeline();
 
-    tl.to(card, { backgroundColor: "#ffffff", borderColor: "#d1d5db", duration: 0.3 })
-      .to(iconContainer, { rotateY: 0, backgroundColor: "#f2f6f6", duration: 0.4 }, 0)
+    tl.to(card, {
+      backgroundColor: "#ffffff",
+      borderColor: "#d1d5db",
+      duration: 0.3,
+    })
+      .to(
+        iconContainer,
+        { rotateY: 0, backgroundColor: "#f2f6f6", duration: 0.4 },
+        0,
+      )
       .to(icon, { filter: "brightness(1) invert(0)", duration: 0.3 }, 0)
       .to(text, { color: "#000000", duration: 0.3 }, 0);
   };
@@ -52,13 +73,27 @@ const Specialization = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-semibold">Specialities</h1>
-        <div className="flex gap-3">
-          <button ref={prevRef} className="bg-gray-100 p-2 rounded-full shadow hover:bg-gray-200 transition active:scale-95">
+        <div className="flex flex-col gap-5  md:text-left text-center">
+          <h1 className="text-3xl font-semibold">
+            Clinic & <span className="text-primary">Specialities</span>{" "}
+          </h1>
+          <p className="text-gray-500">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
+        <div className="hidden md:flex gap-3">
+          <button
+            ref={prevRef}
+            className="bg-gray-100 p-2 rounded-full shadow hover:bg-gray-200 transition active:scale-95"
+          >
             <ChevronLeft />
           </button>
-          <button ref={nextRef} className="bg-gray-100 p-2 rounded-full shadow hover:bg-gray-200 transition active:scale-95">
-            <ChevronRight/>
+          <button
+            ref={nextRef}
+            className="bg-gray-100 p-2 rounded-full shadow hover:bg-gray-200 transition active:scale-95"
+          >
+            <ChevronRight />
           </button>
         </div>
       </div>
@@ -82,7 +117,7 @@ const Specialization = () => {
       >
         {specialIcon.map((item) => (
           <SwiperSlide key={item.id} className="py-4">
-            <div 
+            <div
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
               className="innercard w-full h-60 border border-gray-300 rounded-2xl p-5 flex flex-col items-center justify-center shadow-sm cursor-pointer bg-white"
@@ -94,7 +129,9 @@ const Specialization = () => {
                   alt={item.title}
                 />
               </div>
-              <h3 className="text-center font-semibold transition-colors">{item.title}</h3>
+              <h3 className="text-center font-semibold transition-colors">
+                {item.title}
+              </h3>
             </div>
           </SwiperSlide>
         ))}
