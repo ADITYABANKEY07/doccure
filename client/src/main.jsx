@@ -7,9 +7,12 @@ import { BrowserRouter } from "react-router-dom"
 import "@fontsource/poppins/400.css"; // Regular
 import "@fontsource/poppins/600.css"; // Semi-Bold
 import "@fontsource/poppins/700.css"; // Bold
+import CursorContext, { CustomCursor } from './context/CursorContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
+  <CursorContext>
     <App/>
+  </CursorContext>
   </BrowserRouter>
 )

@@ -39,7 +39,7 @@ const Navbar = () => {
           </Link>
 
           <Link
-            className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-cyan-400 px-5 py-2 rounded-full"
+            className="flex items-center gap-2 bg-drkblue px-5 py-2 rounded-full"
             to="/signup"
           >
             <UserRound size={18} /> Signup
@@ -107,7 +107,7 @@ const Navbar = () => {
             </Link>
 
             <Link
-              className="text-center bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-5 py-2 rounded-full"
+              className="text-center bg-drkblue text-white px-5 py-2 rounded-full"
               to="/signup"
               onClick={() => setIsMobileOpen(false)}
             >

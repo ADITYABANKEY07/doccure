@@ -61,6 +61,9 @@ useGSAP(() => {
 });
 
   return (
+    <div>
+      {/* Hero Section */}
+
     <div className="bg-[#e4efff] h-[42vh] md:h-screen relative px-4 md:px-10 lg:px-20 py-8 overflow-hidden">
       {/* Background Decorative Icons */}
       <img
@@ -214,6 +217,12 @@ useGSAP(() => {
           </div>
         </div>
       </div>
+    </div>
+
+    {/* Specialization Card */}
+   
+    lorem999
+
     </div>
   );
 };
