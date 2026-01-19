@@ -2,16 +2,20 @@ import React from 'react'
 import Navbar from './components/Navbar'
 import { Outlet } from 'react-router-dom'
 import Footer from './components/Footer'
-import Cursor from './components/Cursor' // 1. Import it
+import Cursor from './components/Cursor'
 
 const Layout = () => {
   return (
-    <div className="relative cursor-none"> {/* 2. Optional: hide default cursor */}
+    /* 1. Added 'flex flex-col' and 'min-h-screen' to the wrapper */
+    <div className="relative cursor-none flex flex-col min-h-screen"> 
         <Cursor /> 
         <Navbar/>
-        <main>
+        
+        {/* 2. Added 'flex-grow' to the main tag */}
+        <main className="flex-grow">
           <Outlet/>
         </main>
+        
         <Footer/>
     </div>
   )

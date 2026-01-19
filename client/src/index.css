@@ -15,13 +15,3 @@ h1, h2, h3 {
   --color-drkblue: #012047;
   --color-txtone: #012047;
 }
-
-/* If you want to hide the real mouse cursor globally */
-html, body {
-  cursor: none;
-}
-
-/* Ensure buttons and links also don't show the default pointer */
-a, button {
-  cursor: none
-}
