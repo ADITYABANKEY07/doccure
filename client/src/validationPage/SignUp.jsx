@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
+
   let [error, setError] = useState("");
   let [form, setForm] = useState({
     myname: "",
@@ -35,7 +36,7 @@ const SignUp = () => {
 
     if (form.myname.trim() == "") {
       setError("Please write a valid name");
-    } else if (cleanEmail == "") {
+    } else if (!cleanEmail) {
       setError("Please write a valid email");
     }
     else if (!(hasNumber && hasSymbol && hasUpperCase && hasLowerCase)) {
@@ -70,6 +71,8 @@ else {
     localStorage.setItem("allUsers", JSON.stringify(users));
 
     alert("Account created successfully!");
+// REPLACE navigate("/login") WITH THIS:
+window.location.href = "/login";
   }
 }
   };
