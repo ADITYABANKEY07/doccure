@@ -1,0 +1,20 @@
+{
+  "appointment": [
+    {
+      "id": "110e",
+      "myname": "Aditya Bankey",
+      "myemail": "adityabankey@gmail.com",
+      "mydoctor": "Dr Saeed Tamer",
+      "mydate": "2026-01-04",
+      "mytime": "03:00 PM"
+    },
+    {
+      "id": "ee4f",
+      "myname": "Joh Doe",
+      "myemail": "john@example.com",
+      "mydoctor": "Dr Darin Elder",
+      "mydate": "2026-01-09",
+      "mytime": "11:30 AM"
+    }
+  ]
+}
