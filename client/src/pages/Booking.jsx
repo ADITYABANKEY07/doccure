@@ -39,7 +39,7 @@ const Booking = () => {
   let handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Final booking:", mydata);
-    let api = "http://localhost:3000/appointment";
+    let api = "https://doccure-json-backend.onrender.com/appointments";
     let response = await axios.post(api, mydata);
     setIsSubmitted(true); // show side button
   };
