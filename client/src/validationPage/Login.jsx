@@ -31,21 +31,22 @@ const Login = () => {
     }
 
     // 1. Get the array of all users
-  let users = JSON.parse(localStorage.getItem("allUsers")) || [];
+    let users = JSON.parse(localStorage.getItem("allUsers")) || [];
 
-  // 2. Try to find a user that matches BOTH email and password
-  let authenticatedUser = users.find(
-    (userData) => userData.myemail === form.myemail && userData.mypass === form.mypass
-  );
+    // 2. Try to find a user that matches BOTH email and password
+    let authenticatedUser = users.find(
+      (userData) =>
+        userData.myemail === form.myemail && userData.mypass === form.mypass,
+    );
 
-// Inside Login.jsx success block
-if (authenticatedUser) {
-    localStorage.setItem("isLoggedIn", "true");
-    localStorage.setItem("currentUser", JSON.stringify(authenticatedUser));
-    
-    // Use this instead of navigate('/')
-    window.location.href = "/"; 
-}
+    // Inside Login.jsx success block
+    if (authenticatedUser) {
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("currentUser", JSON.stringify(authenticatedUser));
+
+      // Use this instead of navigate('/')
+      window.location.href = "/";
+    }
   };
 
   return (
