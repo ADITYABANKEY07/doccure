@@ -1,6 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Facebook, Instagram, Send, Twitter, } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { Facebook, Instagram, Send, Twitter } from "lucide-react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+import { useRef } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Footer = () => {
   const footerData = {
@@ -10,14 +16,34 @@ const Footer = () => {
     utilities: ["Medical", "Operation", "Laboratory", "ICU"],
   };
 
+const footerRef = useRef(null);
+  const location = useLocation(); // Track page changes
+
+useGSAP(() => {
+    ScrollTrigger.refresh();
+    gsap.from(".footer-column", {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: footerRef.current,
+        start: "top 90%",
+        toggleActions: "play none none none",
+        once: true,
+      },
+    });
+  }, { dependencies: [location.pathname], scope: footerRef }); 
+
   return (
-    <footer className="bg-[#eaf4ff] pt-12">
+    <footer ref={footerRef} className="bg-[#eaf4ff] pt-12">
       <div className="container mx-auto px-6">
         {/* 2. MIDDLE SECTION: Links Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 pb-12">
           {/* Dynamic Links columns */}
           {Object.entries(footerData).map(([category, items]) => (
-            <div key={category} className="flex flex-col">
+            <div key={category} className="footer-column flex flex-col">
               <h3 className="text-lg font-bold text-txtone mb-6 capitalize">
                 {category}
               </h3>
@@ -37,7 +63,7 @@ const Footer = () => {
           ))}
 
           {/* Newsletter (The 5th Column) */}
-          <div className="col-span-2 lg:col-span-1">
+          <div className="footer-column col-span-2 lg:col-span-1">
             <h3 className="text-lg font-bold text-txtone mb-6 capitalize">
               Newsletter
             </h3>
@@ -56,14 +82,14 @@ const Footer = () => {
               </button>
             </div>
             <div className="md:mt-5">
-                          <h3 className="text-lg font-bold text-txtone mb-6 capitalize">
-              Connect With Us
-            </h3>
-            <div className="sociallink flex gap-5">
-              <Facebook className="w-10 h-10 p-2 rounded-full bg-[#e2edff] shadow-2xl text-gray-700"/>
-              <Twitter className="w-10 h-10 p-2 rounded-full bg-[#e2edff] shadow-2xl text-gray-700"/>
-              <Instagram className="w-10 h-10 p-2 rounded-full bg-[#e2edff] shadow-2xl text-gray-700"/>
-            </div>
+              <h3 className="text-lg font-bold text-txtone mb-6 capitalize">
+                Connect With Us
+              </h3>
+              <div className="sociallink flex gap-5">
+                <Facebook className="w-10 h-10 p-2 rounded-full bg-[#e2edff] shadow-2xl text-gray-700" />
+                <Twitter className="w-10 h-10 p-2 rounded-full bg-[#e2edff] shadow-2xl text-gray-700" />
+                <Instagram className="w-10 h-10 p-2 rounded-full bg-[#e2edff] shadow-2xl text-gray-700" />
+              </div>
             </div>
           </div>
         </div>

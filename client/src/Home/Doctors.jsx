@@ -6,6 +6,10 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { useNavigate } from "react-router-dom";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/all";
+
+gsap.registerPlugin(ScrollTrigger)
 
 const Doctors = () => {
   const navigate = useNavigate();
@@ -75,11 +79,59 @@ const Doctors = () => {
     navigate(`/booking?doctor=${encodeURIComponent(doctorName)}`);
   };
 
+  
+
+    let containerRef = useRef(null);
+
+  useGSAP(
+    () => {
+      gsap.from(".textcontent", {
+        x: -200,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+          end: "top 30%",
+          toggleActions: "play none none reverse",
+          markers: false,
+        },
+      });
+            gsap.from(".arrow", {
+        x: -200,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+          end: "top 30%",
+          toggleActions: "play none none reverse",
+          markers: false,
+        },
+      });
+      gsap.from(".innercard", {
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 60%",
+          end: "top -80%",
+          markers: true
+        },
+      });
+    },
+    { scope: containerRef },
+  );
+
   return (
-    <div className="bg-[#f9fafb] py-16 px-4">
+    <div ref={containerRef} className="bg-[#f9fafb] py-16 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-10">
-          <div className="flex flex-col gap-2 md:text-left text-center max-w-xl">
+          <div className="textcontent flex flex-col gap-2 md:text-left text-center max-w-xl">
             <h2 className="text-3xl font-bold text-gray-800">
               Book Our <span className="text-blue-600">Best Doctors</span>
             </h2>
@@ -90,7 +142,7 @@ const Doctors = () => {
           </div>
 
           {/* Custom Navigation */}
-          <div className="hidden md:flex gap-3">
+          <div className="arrow hidden md:flex gap-3">
             <button
               ref={prevRef}
               className="bg-white p-3 rounded-full shadow-md hover:bg-blue-600 hover:text-white transition-all border border-gray-100 active:scale-90"
@@ -137,7 +189,7 @@ const Doctors = () => {
               <div
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
-                className="bg-white rounded-2xl shadow-md overflow-hidden relative border border-gray-100 cursor-pointer h-full"
+                className="innercard bg-white rounded-2xl shadow-md overflow-hidden relative border border-gray-100 cursor-pointer h-full"
               >
                 <div className="absolute top-4 right-4 z-10 bg-white/90 backdrop-blur-sm px-4 py-1 rounded-full shadow-sm text-sm font-semibold text-gray-800">
                   ${item.fees}

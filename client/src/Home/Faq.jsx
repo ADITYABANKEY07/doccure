@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import { gsap } from "gsap";
 import { ChevronDown, Plus, Minus } from "lucide-react";
+import { ScrollTrigger } from "gsap/all";
+import { useGSAP } from "@gsap/react";
 
 const AccordionItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,7 +46,11 @@ const AccordionItem = ({ question, answer }) => {
           ${isOpen ? "bg-primary" : "bg-white"}
           `}
         >
-          {isOpen ? <Minus className="w-7 h-7" /> : <Plus className="w-7 h-7" />}
+          {isOpen ? (
+            <Minus className="w-7 h-7" />
+          ) : (
+            <Plus className="w-7 h-7" />
+          )}
         </span>
       </button>
 
@@ -89,12 +95,45 @@ const Faq = () => {
     },
   ];
 
+  const containerRef = useRef(null)
+
+  useGSAP(
+    () => {
+      gsap.from(".textcontent", {
+        x: -200,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+          end: "top 30%",
+          toggleActions: "play none none reverse",
+          markers: false,
+        },
+      });
+
+            gsap.from(".faqcard", {
+              y: 100,
+              opacity: 0,
+              duration: 1,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top 60%",
+                end: "top -80%",
+              },
+            });
+    },
+    { scope: containerRef },
+  );
+
   return (
-    <div className="max-w-6xl mx-auto mt-10 p-6 bg-white">
-      <h2 className="text-3xl font-bold mb-8 text-center md:text-left text-[#272b41]">
+    <div ref={containerRef} className="max-w-6xl mx-auto mt-10 p-6 bg-white">
+      <h2 className="textcontent text-3xl font-bold mb-8 text-center md:text-left text-[#272b41]">
         Frequently <span className="text-primary">Asked Questions</span>
       </h2>
-      <div className="space-y-2">
+      <div className="faqcard space-y-2">
         {faqData.map((item, index) => (
           <AccordionItem
             key={index}

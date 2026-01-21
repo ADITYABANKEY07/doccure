@@ -3,9 +3,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import gsap from "gsap";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-
 import "swiper/css";
 import "swiper/css/navigation";
+import { ScrollTrigger } from "gsap/all";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger)
 
 const Specialization = () => {
   const prevRef = useRef(null);
@@ -19,6 +22,52 @@ const Specialization = () => {
     { id: 5, title: "Ophthalmology", img: "./ophthalmologyicon.svg" },
     { id: 6, title: "Orthopedic", img: "./orthopedicicon.svg" },
   ];
+  
+
+    let containerRef = useRef(null);
+
+  useGSAP(
+    () => {
+      gsap.from(".textcontent", {
+        x: -200,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+          end: "top 30%",
+          toggleActions: "play none none reverse",
+          markers: false,
+        },
+      });
+            gsap.from(".arrow", {
+        x: -200,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+          end: "top 30%",
+          toggleActions: "play none none reverse",
+          markers: false,
+        },
+      });
+      gsap.from(".innercard", {
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 60%",
+          end: "top -80%",
+        },
+      });
+    },
+    { scope: containerRef },
+  );
 
   // GSAP Animation Logic
   const handleMouseEnter = (e) => {
@@ -71,9 +120,9 @@ const Specialization = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10">
+    <div ref={containerRef} className="max-w-6xl mx-auto px-4 py-10">
       <div className="flex justify-between items-center mb-6">
-        <div className="flex flex-col gap-5  md:text-left text-center">
+        <div className="textcontent flex flex-col gap-5  md:text-left text-center">
           <h1 className="text-3xl font-semibold">
             Clinic & <span className="text-primary">Specialities</span>{" "}
           </h1>
@@ -82,7 +131,7 @@ const Specialization = () => {
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
         </div>
-        <div className="hidden md:flex gap-3">
+        <div className="arrow hidden md:flex gap-3">
           <button
             ref={prevRef}
             className="bg-gray-100 p-2 rounded-full shadow hover:bg-gray-200 transition active:scale-95"
