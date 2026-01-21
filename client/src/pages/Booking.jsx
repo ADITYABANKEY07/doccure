@@ -46,7 +46,7 @@ const Booking = () => {
       {/* ALWAYS VISIBLE VIEW STATUS BUTTON */}
       <button
         onClick={() => navigate("/status")}
-        className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-50 flex items-center gap-2 bg-white text-blue-600 border-2 border-blue-600 px-6 py-3 rounded-full font-bold shadow-2xl hover:bg-blue-600 hover:text-white transition-all active:scale-95 group"
+        className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-50 flex items-center gap-2 bg-white text-primary border-2 border-primary px-6 py-3 rounded-full font-bold shadow-2xl hover:bg-blue-600 hover:text-white transition-all active:scale-95 group"
       >
         <ClipboardList size={20} className="group-hover:rotate-12 transition-transform" />
         <span className="hidden sm:inline">View All Bookings</span>
@@ -56,7 +56,7 @@ const Booking = () => {
       <div className="w-full max-w-lg bg-white rounded-2xl shadow-xl border border-gray-100 p-6 md:p-8">
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-gray-800">
-            Book an <span className="text-blue-600">Appointment</span>
+            Book an <span className="text-primary">Appointment</span>
           </h2>
           <p className="text-gray-500 text-sm mt-1">
             Please fill in the details to schedule your visit.
@@ -67,7 +67,7 @@ const Booking = () => {
           {/* Full Name */}
           <div className="space-y-1">
             <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
-              <User size={16} className="text-blue-500" /> Full Name
+              <User size={16} className="text-primary" /> Full Name
             </label>
             <input
               onChange={handleChange}
@@ -83,7 +83,7 @@ const Booking = () => {
           {/* Email */}
           <div className="space-y-1">
             <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
-              <Mail size={16} className="text-blue-500" /> Email Address
+              <Mail size={16} className="text-primary" /> Email Address
             </label>
             <input
               onChange={handleChange}
@@ -118,7 +118,7 @@ const Booking = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1">
               <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
-                <Calendar size={16} className="text-blue-500" /> Date
+                <Calendar size={16} className="text-primary" /> Date
               </label>
               <input
                 type="date"
@@ -132,7 +132,7 @@ const Booking = () => {
 
             <div className="space-y-1">
               <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
-                <Clock size={16} className="text-blue-500" /> Time
+                <Clock size={16} className="text-primary" /> Time
               </label>
               <select
                 onChange={handleChange}
@@ -152,7 +152,7 @@ const Booking = () => {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg transition-transform active:scale-[0.98] mt-4"
+            className="w-full bg-primary hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg transition-transform active:scale-[0.98] mt-4"
           >
             Confirm Appointment
           </button>
