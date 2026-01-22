@@ -220,7 +220,7 @@ const Doctors = () => {
                     onClick={() => handleBookClick(item.name)}
                     className="w-full mt-6 py-3 border-2 border-blue-600 text-blue-600 font-bold rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300"
                   >
-                    View Profile
+                    Book Now
                   </button>
                 </div>
               </div>
