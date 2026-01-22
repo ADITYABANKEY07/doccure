@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Facebook, Instagram, Send, Twitter } from "lucide-react";
 import { useGSAP } from "@gsap/react";
@@ -30,6 +29,7 @@ useGSAP(() => {
       scrollTrigger: {
         trigger: footerRef.current,
         start: "top 90%",
+        end: "top 20%",
         toggleActions: "play none none none",
         once: true,
       },
