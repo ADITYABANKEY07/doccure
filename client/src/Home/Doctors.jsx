@@ -108,7 +108,7 @@ const Doctors = () => {
           start: "top 80%",
           end: "top 30%",
           toggleActions: "play none none reverse",
-          markers: false,
+          markers: false
         },
       });
       gsap.from(".innercard", {
@@ -119,8 +119,7 @@ const Doctors = () => {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 60%",
-          end: "top -80%",
-          markers: true
+          end: "top -80%"
         },
       });
     },
