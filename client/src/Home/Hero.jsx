@@ -157,7 +157,7 @@ const Hero = () => {
 
                 {/* Search Button */}
                 <button className="w-full mt-1 md:mt-0 bg-gradient-to-r from-primary to-secondary text-white px-10 py-10 md:px-8 md:py-7 rounded-full flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-md">
-                  <Link to='/booking' className="font-semibold text-2sm text-nowrap md:text-xl tracking-wide">Take Appointment Now</Link>
+                  <Link to='/booking' className="font-semibold text-sm text-nowrap md:text-xl tracking-wide">Take Appointment Now</Link>
                 </button>
               </div>
             </div>
