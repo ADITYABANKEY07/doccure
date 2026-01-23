@@ -19,22 +19,22 @@ const footerRef = useRef(null);
   const location = useLocation(); // Track page changes
 
 useGSAP(() => {
-    ScrollTrigger.refresh();
-    gsap.from(".footer-column", {
-      y: 50,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.1,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: footerRef.current,
-        start: "top 90%",
-        end: "top 20%",
-        toggleActions: "play none none none",
-        once: true,
-      },
-    });
-  }, { dependencies: [location.pathname], scope: footerRef }); 
+  gsap.from(".footer-column", {
+    y: 100,
+    opacity: 0,
+    duration: 1,
+    stagger: 0.1,
+    ease: "power3.out",
+    immediateRender: false,
+    scrollTrigger: {
+      trigger: footerRef.current,
+      start: "top bottom",
+      toggleActions: "play none none none",
+      invalidateOnRefresh: true,
+    },
+  });
+}, { dependencies: [location.pathname], scope: footerRef });
+
 
   return (
     <footer ref={footerRef} className="bg-[#eaf4ff] pt-12">
