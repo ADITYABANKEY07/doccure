@@ -38,7 +38,7 @@ const Cursor = () => {
   return (
     <div
       ref={cursorRef}
-      className="fixed top-0 left-0 flex items-center justify-center pointer-events-none z-[9999]"
+      className="hidden md:flex fixed top-0 left-0 items-center justify-center pointer-events-none z-[9999]"
     >
       {/* Outer Ring */}
       <div 
