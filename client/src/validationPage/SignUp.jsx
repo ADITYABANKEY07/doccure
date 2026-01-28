@@ -98,7 +98,7 @@ window.location.href = "/login";
               value={form.myname}
               type="text"
               className="border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-primary focus:outline-none transition-all"
-              placeholder="John Doe"
+              placeholder="Enter your name"
             />
           </div>
 
@@ -110,7 +110,7 @@ window.location.href = "/login";
               value={form.myemail}
               type="text"
               className="border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-primary focus:outline-none transition-all"
-              placeholder="you@example.com"
+              placeholder="Enter your email"
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -121,7 +121,7 @@ window.location.href = "/login";
               value={form.myphoneno}
               type="text"
               className="border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-primary focus:outline-none transition-all"
-              placeholder="1234567890"
+              placeholder="Enter your phone no."
             />
           </div>
 
@@ -133,7 +133,7 @@ window.location.href = "/login";
               value={form.mypass}
               type="password"
               className="border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-primary focus:outline-none transition-all"
-              placeholder="••••••••"
+              placeholder="Enter your password"
             />
           </div>
 
@@ -147,7 +147,7 @@ window.location.href = "/login";
               value={form.mycnpass}
               type="password"
               className="border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-primary focus:outline-none transition-all"
-              placeholder="••••••••"
+              placeholder="Enter your confirm password"
             />
           </div>
 

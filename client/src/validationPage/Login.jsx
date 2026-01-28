@@ -71,7 +71,7 @@ const Login = () => {
               type="text"
               onChange={handleChange}
               className="border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-primary focus:outline-none transition-all"
-              placeholder="you@example.com"
+              placeholder="Enter your email"
             />
           </div>
 
@@ -83,7 +83,7 @@ const Login = () => {
               type="password"
               onChange={handleChange}
               className="border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-primary focus:outline-none transition-all"
-              placeholder="••••••••"
+              placeholder="Enter your password"
             />
           </div>
 
