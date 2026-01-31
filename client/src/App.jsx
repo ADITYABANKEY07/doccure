@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; // Added Hooks
+import React, { useState, useEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Layout from './Layout';
 import Home from "./pages/Home";
@@ -9,55 +9,49 @@ import Booking from "./pages/Booking";
 import Status from './pages/Status';
 
 const App = () => {
-  // Use state so React watches these values
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn") === "true");
   const [hasAccount, setHasAccount] = useState(localStorage.getItem("allUsers") !== null);
 
-  // This ensures that when the page reloads (after signup), the data is fresh
   useEffect(() => {
-    setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
-    setHasAccount(localStorage.getItem("allUsers") !== null);
+    
+    const syncState = () => {
+      setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
+      setHasAccount(localStorage.getItem("allUsers") !== null);
+    };
+    window.addEventListener('storage', syncState);
+    return () => window.removeEventListener('storage', syncState);
   }, []);
 
   return (
-    <div>
-      <Routes>
-        {isLoggedIn ? (
-          /* --- STATE 1: LOGGED IN --- */
-          <Route path='/' element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path='home' element={<Home />} />
-            <Route path='contact' element={<Contact />} />
-            <Route path='booking' element={<Booking />} />
-            <Route path='status' element={<Status />} />
-            <Route path='login' element={<Navigate to="/" />} />
-            <Route path='signup' element={<Navigate to="/" />} />
-          </Route>
-        ) : (
-          /* --- STATE 2 & 3: NOT LOGGED IN --- */
-          <>
-            {/* Logic: Protect login route manually */}
-            <Route 
-              path='/login' 
-              element={hasAccount ? <Login /> : <Navigate to="/signup" />} 
-            />
-            
-            <Route path='/signup' element={<SignUp />} />
+    <Routes>
+      
+      <Route path='/' element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path='home' element={<Home />} />
+        <Route path='contact' element={<Contact />} />
 
-            {/* If no path matches, decide where to send them based on data */}
-            <Route 
-              path='/' 
-              element={hasAccount ? <Navigate to="/login" /> : <Navigate to="/signup" />} 
-            />
+        
+        <Route 
+          path='booking' 
+          element={isLoggedIn ? <Booking /> : <Navigate to="/login" />} 
+        />
+        <Route 
+          path='status' 
+          element={isLoggedIn ? <Status /> : <Navigate to="/login" />} 
+        />
+      </Route>
 
-            <Route 
-              path='*' 
-              element={<Navigate to={hasAccount ? "/login" : "/signup"} />} 
-            />
-          </>
-        )}
-      </Routes>
-    </div>
+      <Route 
+        path='/login' 
+        element={isLoggedIn ? <Navigate to="/" /> : (hasAccount ? <Login /> : <Navigate to="/signup" />)} 
+      />
+      <Route 
+        path='/signup' 
+        element={isLoggedIn ? <Navigate to="/" /> : <SignUp />} 
+      />
+
+      <Route path='*' element={<Navigate to="/" />} />
+    </Routes>
   );
 };
 

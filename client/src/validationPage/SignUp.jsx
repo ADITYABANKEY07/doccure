@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
-
   let [error, setError] = useState("");
   let [form, setForm] = useState({
     myname: "",
     myemail: "",
-    myphoneno:"",
     mypass: "",
     mycnpass: "",
   });
@@ -31,140 +29,120 @@ const SignUp = () => {
     let hasSymbol = form.mypass.match(/[!@#$%^&*]/);
     let hasUpperCase = form.mypass.match(/[A-Z]/);
     let hasLowerCase = form.mypass.match(/[a-z]/);
-    let phone = form.myphoneno.trim()
-    let isOnlyDigits = /^[0-9]+$/.test(phone);
-
     if (form.myname.trim() == "") {
       setError("Please write a valid name");
     } else if (!cleanEmail) {
       setError("Please write a valid email");
-    }
-    else if (!(hasNumber && hasSymbol && hasUpperCase && hasLowerCase)) {
+    } else if (!(hasNumber && hasSymbol && hasUpperCase && hasLowerCase)) {
       setError("Please write a valid password");
+    } else if (form.mypass !== form.mycnpass) {
+      setError("Password is not matching");
     }
-    else if(!isOnlyDigits){
-      setError("Please enter number only")
+    // Inside SignUp.jsx -> handleSubmit -> else block
+    else {
+      setError("");
+
+      // 1. Get existing users from localStorage, or an empty array [] if none exist
+      let users = JSON.parse(localStorage.getItem("allUsers")) || [];
+
+      // 2. Check if this email is already registered
+      let exists = users.find((u) => u.myemail === form.myemail);
+
+      if (exists) {
+        setError("This email is already registered!");
+      } else {
+        // 3. Add the new user to the array
+        users.push(form);
+
+        // 4. Save the updated array back to localStorage
+        localStorage.setItem("allUsers", JSON.stringify(users));
+
+        alert("Account created successfully!");
+        // REPLACE navigate("/login") WITH THIS:
+        window.location.href = "/login";
+      }
     }
-    else if(phone.length!=10){
-      setError("Please enter number 10 digits number")
-    }
-    else if(form.mypass !== form.mycnpass){
-      setError("Password is not matching")
-    }
-// Inside SignUp.jsx -> handleSubmit -> else block
-else {
-  setError("");
-
-  // 1. Get existing users from localStorage, or an empty array [] if none exist
-  let users = JSON.parse(localStorage.getItem("allUsers")) || [];
-
-  // 2. Check if this email is already registered
-  let exists = users.find(u => u.myemail === form.myemail);
-  
-  if (exists) {
-    setError("This email is already registered!");
-  } else {
-    // 3. Add the new user to the array
-    users.push(form);
-
-    // 4. Save the updated array back to localStorage
-    localStorage.setItem("allUsers", JSON.stringify(users));
-
-    alert("Account created successfully!");
-// REPLACE navigate("/login") WITH THIS:
-window.location.href = "/login";
-  }
-}
   };
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col pb-15">
+    <div
+      className="min-h-screen flex flex-col pb-16 bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/formbg.jpg')" }}
+    >
       {/* Header Section */}
-      <header className="w-full h-40 bg-primary flex items-center justify-center">
+      {/* <header className="w-full h-40 bg-primary flex items-center justify-center">
         <h1 className="text-4xl font-bold text-white tracking-tight">SignUp</h1>
-      </header>
+      </header> */}
 
       {/* Form Section */}
-      <main className="flex-grow flex justify-center items-start pt-12 px-4">
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col gap-5 bg-white rounded-xl shadow-lg border border-gray-100 p-8 w-full max-w-md"
-        >
-          <p className="text-red-500">{error}</p>
-          <div className="flex flex-col gap-1">
-            <label className="font-medium text-gray-700">Full Name</label>
-            <input
-              onChange={handleChange}
-              name="myname"
-              value={form.myname}
-              type="text"
-              className="border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-primary focus:outline-none transition-all"
-              placeholder="Enter your name"
-            />
+      <main className="flex-grow flex items-center justify-center px-4 py-10">
+        <div className="w-full max-w-6xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
+          {/* LEFT SIDE – FORM */}
+          <div className="p-10">
+            <h2 className="text-3xl font-bold mb-2">Create Your Account</h2>
+            <p className="text-gray-500 mb-6">Join us and start your journey</p>
+
+            {error && <p className="text-red-500 mb-4">{error}</p>}
+
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              <input
+                name="myname"
+                value={form.myname}
+                onChange={handleChange}
+                placeholder="Full Name"
+                className="border rounded-md px-4 py-3 focus:ring-2 focus:ring-primary outline-none"
+              />
+
+              <input
+                name="myemail"
+                value={form.myemail}
+                onChange={handleChange}
+                placeholder="Email"
+                className="border rounded-md px-4 py-3 focus:ring-2 focus:ring-primary outline-none"
+              />
+
+              <input
+                type="password"
+                name="mypass"
+                value={form.mypass}
+                onChange={handleChange}
+                placeholder="Password"
+                className="border rounded-md px-4 py-3 focus:ring-2 focus:ring-primary outline-none"
+              />
+
+              <input
+                type="password"
+                name="mycnpass"
+                value={form.mycnpass}
+                onChange={handleChange}
+                placeholder="Confirm Password"
+                className="border rounded-md px-4 py-3 focus:ring-2 focus:ring-primary outline-none"
+              />
+
+              <button
+                type="submit"
+                className="mt-3 bg-primary text-white py-3 rounded-lg font-semibold hover:opacity-90 transition"
+              >
+                Sign Up
+              </button>
+
+              <p className="text-sm text-center text-gray-500 mt-3">
+                Already have an account?{" "}
+                <Link to="/login" className="text-primary font-semibold">
+                  Log in
+                </Link>
+              </p>
+            </form>
           </div>
 
-          <div className="flex flex-col gap-1">
-            <label className="font-medium text-gray-700">Email Address</label>
-            <input
-              onChange={handleChange}
-              name="myemail"
-              value={form.myemail}
-              type="text"
-              className="border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-primary focus:outline-none transition-all"
-              placeholder="Enter your email"
-            />
+          {/* RIGHT SIDE – ILLUSTRATION */}
+          <div className="hidden md:flex items-center justify-center p-10">
+            {/* <img
+        src="/docillustration.jpg"
+        alt="Signup Illustration"
+        className="max-w-md"
+      /> */}
           </div>
-          <div className="flex flex-col gap-1">
-            <label className="font-medium text-gray-700">Phone No.</label>
-            <input
-              onChange={handleChange}
-              name="myphoneno"
-              value={form.myphoneno}
-              type="text"
-              className="border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-primary focus:outline-none transition-all"
-              placeholder="Enter your phone no."
-            />
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <label className="font-medium text-gray-700">Password</label>
-            <input
-              onChange={handleChange}
-              name="mypass"
-              value={form.mypass}
-              type="password"
-              className="border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-primary focus:outline-none transition-all"
-              placeholder="Enter your password"
-            />
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <label className="font-medium text-gray-700">
-              Confirm Password
-            </label>
-            <input
-              onChange={handleChange}
-              name="mycnpass"
-              value={form.mycnpass}
-              type="password"
-              className="border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-primary focus:outline-none transition-all"
-              placeholder="Enter your confirm password"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="mt-4 bg-primary hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-colors shadow-md active:transform active:scale-95"
-          >
-            Sign Up
-          </button>
-
-          <p className="text-center text-sm text-gray-500 mt-2">
-            Already have an account?{" "}
-            <Link to="/login" className="text-primary hover:underline">
-              Log in
-            </Link>
-          </p>
-        </form>
+        </div>
       </main>
     </div>
   );
