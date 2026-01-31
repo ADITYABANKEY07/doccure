@@ -1,7 +1,10 @@
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Added useNavigate
 
 const SignUp = () => {
+  const navigate = useNavigate(); // Initialize navigation
   let [error, setError] = useState("");
   let [form, setForm] = useState({
     myname: "",
@@ -9,6 +12,7 @@ const SignUp = () => {
     mypass: "",
     mycnpass: "",
   });
+
   let handleChange = (e) => {
     let { name, value } = e.target;
     setForm((prev) => ({
@@ -20,84 +24,92 @@ const SignUp = () => {
   let handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validation Email
-
+    // Validation logic
     let cleanEmail =
       form.myemail.includes("@") && form.myemail.includes(".com");
-
-    let hasNumber = form.mypass.match(/[1234567890]/);
+    let hasNumber = form.mypass.match(/[0-9]/);
     let hasSymbol = form.mypass.match(/[!@#$%^&*]/);
     let hasUpperCase = form.mypass.match(/[A-Z]/);
     let hasLowerCase = form.mypass.match(/[a-z]/);
-    if (form.myname.trim() == "") {
-      setError("Please write a valid name");
-    } else if (!cleanEmail) {
+
+if (!cleanEmail) {
       setError("Please write a valid email");
     } else if (!(hasNumber && hasSymbol && hasUpperCase && hasLowerCase)) {
-      setError("Please write a valid password");
+      setError(
+        "Password must include uppercase, lowercase, number, and symbol",
+      );
     } else if (form.mypass !== form.mycnpass) {
-      setError("Password is not matching");
-    }
-    // Inside SignUp.jsx -> handleSubmit -> else block
-    else {
+      setError("Passwords do not match");
+    } else {
       setError("");
 
-      // 1. Get existing users from localStorage, or an empty array [] if none exist
       let users = JSON.parse(localStorage.getItem("allUsers")) || [];
-
-      // 2. Check if this email is already registered
       let exists = users.find((u) => u.myemail === form.myemail);
 
       if (exists) {
         setError("This email is already registered!");
       } else {
-        // 3. Add the new user to the array
         users.push(form);
-
-        // 4. Save the updated array back to localStorage
         localStorage.setItem("allUsers", JSON.stringify(users));
-
         alert("Account created successfully!");
-        // REPLACE navigate("/login") WITH THIS:
-        window.location.href = "/login";
+
+        // Use navigate for a smoother transition
+        navigate("/login");
       }
     }
   };
+
+  useGSAP(() => {
+    (gsap.from(".img", {
+      rotateY: 180,
+      duration: 2,
+      opacity: 0,
+      ease: "power3.out",
+    }),
+      gsap.from(".left", {
+        x: -40,
+        opacity: 0,
+        duration: 2,
+        ease: "bounce.out",
+      }));
+  });
+
   return (
     <div
-      className="min-h-screen flex flex-col pb-16 bg-cover bg-center bg-no-repeat"
+      className="min-h-screen flex flex-col bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: "url('/formbg.jpg')" }}
     >
-      {/* Header Section */}
-      {/* <header className="w-full h-40 bg-primary flex items-center justify-center">
-        <h1 className="text-4xl font-bold text-white tracking-tight">SignUp</h1>
-      </header> */}
-
-      {/* Form Section */}
       <main className="flex-grow flex items-center justify-center px-4 py-10">
-        <div className="w-full max-w-6xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
+        {/* Removed overflow-hidden from the container to ensure content is accessible */}
+        <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 bg-white/50 backdrop-blur-sm rounded-2xl shadow-2xl">
           {/* LEFT SIDE – FORM */}
-          <div className="p-10">
-            <h2 className="text-3xl font-bold mb-2">Create Your Account</h2>
-            <p className="text-gray-500 mb-6">Join us and start your journey</p>
+          <div className="left p-10">
+            <h2 className="text-3xl font-bold mb-2 text-black">
+              Create Your Account
+            </h2>
+            {/* <p className="text-gray-500 mb-6">Join us and start your journey</p> */}
 
-            {error && <p className="text-red-500 mb-4">{error}</p>}
+            {error && (
+              <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-3 mb-4 role='alert'">
+                <p className="text-sm">{error}</p>
+              </div>
+            )}
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-5">
               <input
                 name="myname"
                 value={form.myname}
                 onChange={handleChange}
-                placeholder="Full Name"
-                className="border rounded-md px-4 py-3 focus:ring-2 focus:ring-primary outline-none"
+                placeholder="Enter your fullname"
+                className="border rounded-md px-4 py-3 focus:ring-3 focus:ring-blue-500 outline-none transition-all"
               />
 
               <input
                 name="myemail"
                 value={form.myemail}
                 onChange={handleChange}
-                placeholder="Email"
-                className="border rounded-md px-4 py-3 focus:ring-2 focus:ring-primary outline-none"
+                placeholder="Enter your email address"
+                className="border rounded-md px-4 py-3 focus:ring-3 focus:ring-blue-500 outline-none transition-all"
               />
 
               <input
@@ -105,8 +117,8 @@ const SignUp = () => {
                 name="mypass"
                 value={form.mypass}
                 onChange={handleChange}
-                placeholder="Password"
-                className="border rounded-md px-4 py-3 focus:ring-2 focus:ring-primary outline-none"
+                placeholder="Enter your password"
+                className="border rounded-md px-4 py-3 focus:ring-3 focus:ring-blue-500 outline-none transition-all"
               />
 
               <input
@@ -114,33 +126,36 @@ const SignUp = () => {
                 name="mycnpass"
                 value={form.mycnpass}
                 onChange={handleChange}
-                placeholder="Confirm Password"
-                className="border rounded-md px-4 py-3 focus:ring-2 focus:ring-primary outline-none"
+                placeholder="Enter your confirm password"
+                className="border rounded-md px-4 py-3 focus:ring-3 focus:ring-blue-500 outline-none transition-all"
               />
 
               <button
                 type="submit"
-                className="mt-3 bg-primary text-white py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                className="mt-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg"
               >
                 Sign Up
               </button>
 
               <p className="text-sm text-center text-gray-500 mt-3">
                 Already have an account?{" "}
-                <Link to="/login" className="text-primary font-semibold">
+                <Link
+                  to="/login"
+                  className="text-blue-500 font-semibold hover:underline"
+                >
                   Log in
                 </Link>
               </p>
             </form>
           </div>
 
-          {/* RIGHT SIDE – ILLUSTRATION */}
-          <div className="hidden md:flex items-center justify-center p-10">
-            {/* <img
-        src="/docillustration.jpg"
-        alt="Signup Illustration"
-        className="max-w-md"
-      /> */}
+          {/* RIGHT SIDE – ILLUSTRATION SPACE */}
+          <div className="hidden md:flex items-center bg-white rounded-tr-2xl rounded-br-2xl justify-center p-10">
+            <img
+              src="/docillustration.jpg"
+              alt="Signup Illustration"
+              className="img max-w-md"
+            />
           </div>
         </div>
       </main>
