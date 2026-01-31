@@ -31,9 +31,9 @@ const Navbar = () => {
   useGSAP(()=>{
     gsap.from(".nav", {
       y:-30,
-      duration:1,
+      duration:1.5,
       opacity:0,
-      ease: "bounce.out",
+      ease: "power3.out",
     })
   })
 
