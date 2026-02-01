@@ -18,8 +18,8 @@ const ContactPage = () => {
     {
       icon: <MapPin className="text-blue-600" size={24} />,
       title: "Visit Us",
-      info: "123 Healthcare Blvd",
-      subInfo: "New York, NY 10001"
+      info: "Ekant Park, Rishi Nagar, Mannipuram, ",
+      subInfo: "Char Imli, Bhopal, Madhya Pradesh 462016"
     }
   ];
 
