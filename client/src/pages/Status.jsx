@@ -2,15 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { MoveLeft, Trash2 } from "lucide-react";
 
-const BASE_URL = "https://doccure-json-backend.onrender.com";
-
 const Status = () => {
   const [booking, setBooking] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const loadData = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/appointments`);
+      const response = await axios.get(`http://localhost:3000/appointments`);
       setBooking(response.data);
     } catch (error) {
       console.error("Error fetching data", error);
@@ -21,7 +19,7 @@ const Status = () => {
 
   const myDel = async (id) => {
     if (window.confirm("Are you sure you want to cancel this booking?")) {
-      await axios.delete(`${BASE_URL}/appointments/${id}`);
+      await axios.delete(`http://localhost:3000/appointments/${id}`);
       loadData();
     }
   };

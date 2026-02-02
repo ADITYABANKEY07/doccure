@@ -31,7 +31,7 @@ const Booking = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let api = "https://doccure-json-backend.onrender.com/appointments";
+      let api = "http://localhost:3000/appointments";
       await axios.post(api, mydata);
       alert("Appointment Booked Successfully!");
       navigate("/status");
