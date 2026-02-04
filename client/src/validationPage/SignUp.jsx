@@ -154,7 +154,7 @@ if (!cleanEmail) {
             <img
               src="/docillustration.jpg"
               alt="Signup Illustration"
-              className="img max-w-md"
+              className="img max-w-sm"
             />
           </div>
         </div>
