@@ -1,3 +1,12 @@
 {
-  "appointments": []
+  "appointments": [
+    {
+      "id": "ee94",
+      "myname": "Aditya Bankey",
+      "myemail": "bankeyaditya7@gmail.com",
+      "mydoctor": "Dr Darin Elder",
+      "mydate": "2026-02-20",
+      "mytime": "03:00 PM"
+    }
+  ]
 }
