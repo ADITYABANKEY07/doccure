@@ -28,18 +28,22 @@ const Booking = () => {
     }
   }, [location]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      let loggedEmail = localStorage.getItem("useremail")
-      let api = "http://localhost:3000/appointments";
-      await axios.post(api, {...mydata, loggedUser: loggedEmail});
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  const loggedEmail = localStorage.getItem("useremail");
+  const api = "http://localhost:3000/appointments";
+
+  axios.post(api, { ...mydata, loggedUser: loggedEmail })
+    .then((response) => {
       alert("Appointment Booked Successfully!");
       navigate("/status");
-    } catch (error) {
-      alert("Error booking appointment");
-    }
-  };
+    })
+    .catch((error) => {
+      console.error("Post Error:", error);
+      alert("Error booking appointment. Is the server running?");
+    });
+};
 
   return (
     <div className="relative flex justify-center items-center min-h-screen bg-gray-50 p-4 pt-20">
