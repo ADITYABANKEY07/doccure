@@ -31,8 +31,9 @@ const Booking = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      let loggedEmail = localStorage.getItem()
       let api = "http://localhost:3000/appointments";
-      await axios.post(api, mydata);
+      await axios.post(api, {...mydata, loggedUser: loggedEmail});
       alert("Appointment Booked Successfully!");
       navigate("/status");
     } catch (error) {

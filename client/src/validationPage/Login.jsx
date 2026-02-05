@@ -40,6 +40,7 @@ const Login = () => {
     if (authenticatedUser) {
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("currentUser", JSON.stringify(authenticatedUser));
+      localStorage.setItem("useremail", authenticatedUser.myemail)
       
       // Using window.location.href forces a refresh, 
       // which is helpful if your Navbar needs to detect the new localStorage state.

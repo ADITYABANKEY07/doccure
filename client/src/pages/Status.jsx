@@ -27,11 +27,14 @@ const Status = () => {
 
   let navigate = useNavigate()
 
+  let currentEmail = localStorage.getItem("useremail")
+
   // LOAD DATA
   const loadData = async () => {
     try {
       const response = await axios.get("http://localhost:3000/appointments");
-      setBooking(response.data);
+      let filterData = response.data.filter(item=>item.loggedUser===currentEmail)
+      setBooking(filterData);
     } catch (error) {
       console.error("Error fetching data", error);
     } finally {
