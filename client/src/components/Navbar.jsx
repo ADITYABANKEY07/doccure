@@ -43,8 +43,8 @@ const Navbar = () => {
       <div className="nav hidden md:flex h-20 items-center justify-around">
         <Link to="/">
           <img
-            src="/doccure.png"
-            alt="Doccure Logo"
+            src="/docease.png"
+            alt="docease Logo"
             className="h-10 scale-450 object-contain"
           />
         </Link>
@@ -124,8 +124,8 @@ const Navbar = () => {
         </button>
         <Link to="/">
           <img
-            src="/doccure.png"
-            alt="Doccure Logo"
+            src="/docease.png"
+            alt="Docease Logo"
             className="h-8 scale-450 object-contain"
           />
         </Link>

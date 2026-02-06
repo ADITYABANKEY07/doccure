@@ -9,7 +9,7 @@ import {
   User,
   Mail,
 } from "lucide-react";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 const Status = () => {
   const [booking, setBooking] = useState([]);
@@ -25,15 +25,17 @@ const Status = () => {
     mytime: "",
   });
 
-  let navigate = useNavigate()
+  let navigate = useNavigate();
 
-  let currentEmail = localStorage.getItem("useremail")
+  let currentEmail = localStorage.getItem("useremail");
 
   // LOAD DATA
   const loadData = async () => {
     try {
       const response = await axios.get("http://localhost:3000/appointments");
-      let filterData = response.data.filter(item=>item.loggedUser===currentEmail)
+      let filterData = response.data.filter(
+        (item) => item.loggedUser === currentEmail,
+      );
       setBooking(filterData);
     } catch (error) {
       console.error("Error fetching data", error);
@@ -48,7 +50,7 @@ const Status = () => {
 
   // FILTER DATA (LIVE SEARCH)
   const filteredBookings = booking.filter((item) =>
-    item.myname.toLowerCase().includes(search.toLowerCase())
+    item.myname.toLowerCase().includes(search.toLowerCase()),
   );
 
   // INPUT CHANGE
@@ -63,10 +65,7 @@ const Status = () => {
     if (!editId) return;
 
     try {
-      await axios.put(
-        `http://localhost:3000/appointments/${editId}`,
-        show
-      );
+      await axios.put(`http://localhost:3000/appointments/${editId}`, show);
       alert("Appointment Updated Successfully!");
       setEditForm(false);
       setEditId(null);
@@ -89,7 +88,7 @@ const Status = () => {
   const myEdit = async (id) => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/appointments/${id}`
+        `http://localhost:3000/appointments/${id}`,
       );
       setShow(response.data);
       setEditId(id);
@@ -184,59 +183,56 @@ const Status = () => {
             </table>
           </div>
           {/* MOBILE VIEW */}
-<div className="md:hidden w-full max-w-6xl grid grid-cols-1 gap-4 mt-4">
-  {filteredBookings.map((item) => (
-    <div
-      key={item.id}
-      className="bg-white p-5 rounded-xl shadow-md border-l-4 border-blue-600"
-    >
-      {/* Header */}
-      <div className="flex justify-between items-start mb-3">
-        <div>
-          <p className="text-lg font-bold text-gray-800">
-            {item.myname}
-          </p>
-          <p className="text-sm text-gray-500">
-            {item.myemail}
-          </p>
-        </div>
-        <span className="text-blue-600 font-semibold">
-          {item.mytime}
-        </span>
-      </div>
+          <div className="md:hidden w-full max-w-6xl grid grid-cols-1 gap-4 mt-4">
+            {filteredBookings.map((item) => (
+              <div
+                key={item.id}
+                className="bg-white p-5 rounded-xl shadow-md border-l-4 border-blue-600"
+              >
+                {/* Header */}
+                <div className="flex justify-between items-start mb-3">
+                  <div>
+                    <p className="text-lg font-bold text-gray-800">
+                      {item.myname}
+                    </p>
+                    <p className="text-sm text-gray-500">{item.myemail}</p>
+                  </div>
+                  <span className="text-blue-600 font-semibold">
+                    {item.mytime}
+                  </span>
+                </div>
 
-      {/* Details */}
-      <div className="text-sm text-gray-700 space-y-1 mb-4">
-        <p>
-          <strong>Doctor:</strong> {item.mydoctor}
-        </p>
-        <p>
-          <strong>Date:</strong> {item.mydate}
-        </p>
-      </div>
+                {/* Details */}
+                <div className="text-sm text-gray-700 space-y-1 mb-4">
+                  <p>
+                    <strong>Doctor:</strong> {item.mydoctor}
+                  </p>
+                  <p>
+                    <strong>Date:</strong> {item.mydate}
+                  </p>
+                </div>
 
-      {/* Actions */}
-      <div className="flex gap-3">
-        <button
-          onClick={() => myEdit(item.id)}
-          className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-blue-50 text-blue-600 rounded-lg font-semibold"
-        >
-          <SquarePen size={18} />
-          Edit
-        </button>
+                {/* Actions */}
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => myEdit(item.id)}
+                    className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-blue-50 text-blue-600 rounded-lg font-semibold"
+                  >
+                    <SquarePen size={18} />
+                    Edit
+                  </button>
 
-        <button
-          onClick={() => myDel(item.id)}
-          className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-red-50 text-red-600 rounded-lg font-semibold"
-        >
-          <Trash2 size={18} />
-          Cancel
-        </button>
-      </div>
-    </div>
-  ))}
-</div>
-
+                  <button
+                    onClick={() => myDel(item.id)}
+                    className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-red-50 text-red-600 rounded-lg font-semibold"
+                  >
+                    <Trash2 size={18} />
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </>
       )}
 
@@ -250,7 +246,7 @@ const Status = () => {
             name="myname"
             value={show.myname}
             onChange={handleChange}
-            placeholder="Full Name"
+            placeholder="Enter your full name"
             className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:outline-none focus:ring-blue-500"
             required
           />
@@ -259,7 +255,7 @@ const Status = () => {
             name="myemail"
             value={show.myemail}
             onChange={handleChange}
-            placeholder="Email"
+            placeholder="Enter your email address"
             className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:outline-none focus:ring-blue-500"
             required
           />
@@ -270,11 +266,17 @@ const Status = () => {
             onChange={handleChange}
             className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:outline-none focus:ring-blue-500"
           >
-            <option value="">Choose Doctor</option>
-              <option value="Dr Ruby Perrin">Dr Ruby Perrin (Orthopedic)</option>
-              <option value="Dr Darin Elder">Dr Darin Elder (Cardiologist)</option>
-              <option value="Dr James Amen">Dr James Amen (Neurology)</option>
-              <option value="Dr Saeed Tamer">Dr Saeed Tamer (Ophthalmology)</option>
+            <option value="" disabled>
+              Choose a doctor
+            </option>
+            <option value="Dr Ankit Sharma">
+              Dr Ankit Sharma (Orthopedic)
+            </option>
+            <option value="Dr Priya Verma">
+              Dr Priya Verma (Cardiologist)
+            </option>
+            <option value="Dr Rohit Mehta">Dr Rohit Mehta (Neurology)</option>
+            <option value="Dr Neha Gupta">Dr Neha Gupta (Ophthalmology)</option>
           </select>
 
           <input

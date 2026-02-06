@@ -90,7 +90,7 @@ const ContactPage = () => {
                 <label className="text-sm font-semibold text-gray-700">Email Address</label>
                 <input 
                   type="email" 
-                  placeholder="name@company.com"
+                  placeholder="Enter your email address"
                   className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
                 />
               </div>

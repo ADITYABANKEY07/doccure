@@ -100,7 +100,7 @@ useGSAP(() => {
       <div className="bg-[#e2edff] py-6 px-8">
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-700 text-sm">
-            &copy; {new Date().getFullYear()} Doccure. All rights reserved.
+            &copy; {new Date().getFullYear()} DocEase. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm text-gray-700">
             <Link to="/terms" className="hover:text-blue-600">

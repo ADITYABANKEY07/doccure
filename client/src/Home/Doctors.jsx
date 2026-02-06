@@ -17,40 +17,41 @@ const Doctors = () => {
   const nextRef = useRef(null);
   const [_, setInit] = useState(false); // Used to force re-render once refs are attached
 
-  const docImg = [
-    {
-      id: 1,
-      name: "Dr Ruby Perrin",
-      img: "./doc1.webp",
-      rating: "4.1",
-      peoplecount: "20",
-      fees: "200",
-    },
-    {
-      id: 2,
-      name: "Dr Darin Elder",
-      img: "./doc2.webp",
-      rating: "4.67",
-      peoplecount: "12",
-      fees: "120",
-    },
-    {
-      id: 3,
-      name: "Dr James Amen",
-      img: "./doc3.webp",
-      rating: "3.00",
-      peoplecount: "3",
-      fees: "130",
-    },
-    {
-      id: 4,
-      name: "Dr Saeed Tamer",
-      img: "./doc4.jpg",
-      rating: "3.5",
-      peoplecount: "5",
-      fees: "150",
-    },
-  ];
+const docImg = [
+  {
+    id: 1,
+    name: "Dr Ankit Sharma",
+    img: "./doc1.jpg",
+    rating: "4.1",
+    peoplecount: "20",
+    fees: "2500",
+  },
+  {
+    id: 2,
+    name: "Dr Priya Verma",
+    img: "./doc2.jpg",
+    rating: "4.67",
+    peoplecount: "12",
+    fees: "2000",
+  },
+  {
+    id: 3,
+    name: "Dr Rohit Mehta",
+    img: "./doc3.jpg",
+    rating: "3.00",
+    peoplecount: "3",
+    fees: "3000",
+  },
+  {
+    id: 4,
+    name: "Dr Neha Gupta",
+    img: "./doc4.jpg",
+    rating: "3.5",
+    peoplecount: "5",
+    fees: "2500",
+  },
+];
+
 
   const onMouseEnter = (e) => {
     const card = e.currentTarget;
@@ -191,7 +192,7 @@ const Doctors = () => {
                 className="innercard bg-white rounded-2xl shadow-md overflow-hidden relative border border-gray-100 cursor-pointer h-full"
               >
                 <div className="absolute top-4 right-4 z-10 bg-white/90 backdrop-blur-sm px-4 py-1 rounded-full shadow-sm text-sm font-semibold text-gray-800">
-                  ${item.fees}
+                  {item.fees} Rs
                 </div>
 
                 <div className="overflow-hidden h-64">
