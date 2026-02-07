@@ -24,6 +24,7 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("currentUser");
+    localStorage.removeItem("useremail");
     setIsProfileOpen(false);
     window.location.href = "/login"; // Force reload to reset App.js routes
   };

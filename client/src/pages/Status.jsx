@@ -106,6 +106,8 @@ const Status = () => {
     );
   }
 
+    const today = new Date().toISOString().split("T")[0];
+
   return (
     <div className="flex flex-col items-center min-h-screen bg-gray-50 p-6">
       {/* HEADER */}
@@ -276,31 +278,48 @@ const Status = () => {
               Dr Priya Verma (Cardiologist)
             </option>
             <option value="Dr Rohit Mehta">Dr Rohit Mehta (Neurology)</option>
-            <option value="Dr Neha Gupta">Dr Neha Gupta (Ophthalmology)</option>
+            <option value="Dr Neha Gupta">Dr Neha Gupta (General Physician)</option>
           </select>
 
-          <input
-            type="date"
-            name="mydate"
-            value={show.mydate}
-            onChange={handleChange}
-            className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:outline-none focus:ring-blue-500"
-            required
-          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-1">
+              <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+                <Calendar size={16} className="text-primary" /> Date
+              </label>
 
-          <select
-            name="mytime"
-            value={show.mytime}
-            onChange={handleChange}
-            className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:outline-none focus:ring-blue-500"
-            required
-          >
-            <option value="">Select Time</option>
-            <option value="09:00 AM">09:00 AM</option>
-            <option value="11:30 AM">11:30 AM</option>
-            <option value="03:00 PM">03:00 PM</option>
-            <option value="05:30 PM">05:30 PM</option>
-          </select>
+              <input
+                type="date"
+                name="mydate"
+                value={show.mydate}
+                min={today} // 🚫 blocks previous dates
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
+                required
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+                <Clock size={16} className="text-primary" /> Time
+              </label>
+
+              <select
+                name="mytime"
+                value={show.mytime}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
+                required
+              >
+                <option value="" disabled>
+                  Select time
+                </option>
+                <option value="09:00 AM">09:00 AM</option>
+                <option value="11:30 AM">11:30 AM</option>
+                <option value="03:00 PM">03:00 PM</option>
+                <option value="05:30 PM">05:30 PM</option>
+              </select>
+            </div>
+          </div>
 
           <button
             type="submit"

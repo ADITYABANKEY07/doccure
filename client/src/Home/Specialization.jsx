@@ -19,8 +19,7 @@ const Specialization = () => {
     { id: 2, title: "Dentist", img: "./dentisticon.svg" },
     { id: 3, title: "Laboratory", img: "./labicon.svg" },
     { id: 4, title: "Neurology", img: "./neurologyicon.svg" },
-    { id: 5, title: "Ophthalmology", img: "./ophthalmologyicon.svg" },
-    { id: 6, title: "Orthopedic", img: "./orthopedicicon.svg" },
+    { id: 5, title: "Orthopedic", img: "./orthopedicicon.svg" },
   ];
   
 

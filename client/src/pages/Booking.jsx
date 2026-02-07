@@ -129,7 +129,7 @@ const Booking = () => {
               </option>
               <option value="Dr Rohit Mehta">Dr Rohit Mehta (Neurology)</option>
               <option value="Dr Neha Gupta">
-                Dr Neha Gupta (Ophthalmology)
+                Dr Neha Gupta (General Physician)
               </option>
             </select>
           </div>
