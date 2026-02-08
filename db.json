@@ -1,13 +1,3 @@
 {
-  "appointments": [
-    {
-      "id": "049d",
-      "myname": "Aditya Bankey",
-      "myemail": "bankey7@gmail.com",
-      "mydoctor": "Dr Rohit Mehta",
-      "mydate": "2026-02-18",
-      "mytime": "11:30 AM",
-      "loggedUser": "sajansingh@gmail.com"
-    }
-  ]
+  "appointments": []
 }

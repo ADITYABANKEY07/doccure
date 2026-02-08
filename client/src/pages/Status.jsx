@@ -158,7 +158,7 @@ const myDel = async (id) => {
 
       {/* NO DATA */}
       {filteredBookings.length === 0 ? (
-        <div className="bg-white p-10 rounded-xl shadow-md text-center w-full max-w-xl border">
+        <div className="bg-white p-10 rounded-xl shadow-md text-center w-full max-w-xl">
           <p className="text-gray-500">No matching appointments found.</p>
         </div>
       ) : (
