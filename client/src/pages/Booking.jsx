@@ -3,8 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Calendar, Clock, User, Mail, ClipboardList } from "lucide-react";
 import axios from "axios";
 // 1. Import Toastify
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Booking = () => {
   const location = useLocation();
@@ -16,6 +16,7 @@ const Booking = () => {
     mydoctor: "",
     mydate: "",
     mytime: "",
+    mytextarea: "",
   });
 
   const handleChange = (e) => {
@@ -45,7 +46,7 @@ const Booking = () => {
           position: "top-right",
           autoClose: 2000,
         });
-        
+
         // Delay navigation so the toast is visible
         setTimeout(() => {
           navigate("/status");
@@ -62,7 +63,6 @@ const Booking = () => {
 
   return (
     <div className="relative flex justify-center items-center min-h-screen bg-gray-50 p-4 pt-20">
-      
       {/* 4. Add the ToastContainer */}
       <ToastContainer />
 
@@ -130,11 +130,19 @@ const Booking = () => {
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
               required
             >
-              <option value="" disabled>Choose a doctor</option>
-              <option value="Dr Ankit Sharma">Dr Ankit Sharma (Orthopedic)</option>
-              <option value="Dr Priya Verma">Dr Priya Verma (Cardiologist)</option>
+              <option value="" disabled>
+                Choose a doctor
+              </option>
+              <option value="Dr Ankit Sharma">
+                Dr Ankit Sharma (Orthopedic)
+              </option>
+              <option value="Dr Priya Verma">
+                Dr Priya Verma (Cardiologist)
+              </option>
               <option value="Dr Rohit Mehta">Dr Rohit Mehta (Neurology)</option>
-              <option value="Dr Neha Gupta">Dr Neha Gupta (General Physician)</option>
+              <option value="Dr Neha Gupta">
+                Dr Neha Gupta (General Physician)
+              </option>
             </select>
           </div>
 
@@ -165,13 +173,35 @@ const Booking = () => {
                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
                 required
               >
-                <option value="" disabled>Select time</option>
+                <option value="" disabled>
+                  Select time
+                </option>
                 <option value="09:00 AM">09:00 AM</option>
                 <option value="11:30 AM">11:30 AM</option>
                 <option value="03:00 PM">03:00 PM</option>
                 <option value="05:30 PM">05:30 PM</option>
               </select>
             </div>
+          </div>
+
+          <div className="space-y-1">
+            <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
+              <ClipboardList size={16} className="text-primary" />
+              Describe Your Problem
+              <span className="text-xs text-gray-400 font-normal">
+                (Optional)
+              </span>
+            </label>
+
+            <textarea
+              name="mytextarea"
+              value={mydata.mytextarea}
+              onChange={handleChange}
+              placeholder="Briefly describe your symptoms or concerns"
+              rows={4}
+              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl 
+               focus:ring-2 focus:ring-blue-500 outline-none transition resize-none"
+            />
           </div>
 
           <button
