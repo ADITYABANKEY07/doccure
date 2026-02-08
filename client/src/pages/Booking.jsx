@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Calendar, Clock, User, Mail, ClipboardList } from "lucide-react";
 import axios from "axios";
+// 1. Import Toastify
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Booking = () => {
   const location = useLocation();
@@ -37,12 +40,21 @@ const Booking = () => {
     axios
       .post(api, { ...mydata, loggedUser: loggedEmail })
       .then((response) => {
-        alert("Appointment Booked Successfully!");
-        navigate("/status");
+        // 2. Success Toast
+        toast.success("Appointment Booked Successfully! 🗓️", {
+          position: "top-right",
+          autoClose: 2000,
+        });
+        
+        // Delay navigation so the toast is visible
+        setTimeout(() => {
+          navigate("/status");
+        }, 2000);
       })
       .catch((error) => {
         console.error("Post Error:", error);
-        alert("Error booking appointment. Is the server running?");
+        // 3. Error Toast
+        toast.error("Error booking appointment. Is the server running?");
       });
   };
 
@@ -50,7 +62,10 @@ const Booking = () => {
 
   return (
     <div className="relative flex justify-center items-center min-h-screen bg-gray-50 p-4 pt-20">
-      {/* ALWAYS VISIBLE VIEW STATUS BUTTON */}
+      
+      {/* 4. Add the ToastContainer */}
+      <ToastContainer />
+
       <button
         onClick={() => navigate("/status")}
         className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-50 flex items-center gap-2 bg-white text-primary border-2 border-primary px-6 py-3 rounded-full font-bold shadow-2xl hover:bg-blue-600 hover:text-white transition-all active:scale-95 group"
@@ -74,7 +89,6 @@ const Booking = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Full Name */}
           <div className="space-y-1">
             <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
               <User size={16} className="text-primary" /> Full Name
@@ -90,7 +104,6 @@ const Booking = () => {
             />
           </div>
 
-          {/* Email */}
           <div className="space-y-1">
             <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
               <Mail size={16} className="text-primary" /> Email Address
@@ -106,7 +119,6 @@ const Booking = () => {
             />
           </div>
 
-          {/* Specialist Select */}
           <div className="space-y-1">
             <label className="text-sm font-semibold text-gray-700">
               Select Specialist
@@ -118,35 +130,24 @@ const Booking = () => {
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
               required
             >
-              <option value="" disabled>
-                Choose a doctor
-              </option>
-              <option value="Dr Ankit Sharma">
-                Dr Ankit Sharma (Orthopedic)
-              </option>
-              <option value="Dr Priya Verma">
-                Dr Priya Verma (Cardiologist)
-              </option>
+              <option value="" disabled>Choose a doctor</option>
+              <option value="Dr Ankit Sharma">Dr Ankit Sharma (Orthopedic)</option>
+              <option value="Dr Priya Verma">Dr Priya Verma (Cardiologist)</option>
               <option value="Dr Rohit Mehta">Dr Rohit Mehta (Neurology)</option>
-              <option value="Dr Neha Gupta">
-                Dr Neha Gupta (General Physician)
-              </option>
+              <option value="Dr Neha Gupta">Dr Neha Gupta (General Physician)</option>
             </select>
           </div>
-
-          {/* Date and Time */}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1">
               <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
                 <Calendar size={16} className="text-primary" /> Date
               </label>
-
               <input
                 type="date"
                 name="mydate"
                 value={mydata.mydate}
-                min={today} // 🚫 blocks previous dates
+                min={today}
                 onChange={handleChange}
                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
                 required
@@ -157,7 +158,6 @@ const Booking = () => {
               <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
                 <Clock size={16} className="text-primary" /> Time
               </label>
-
               <select
                 name="mytime"
                 value={mydata.mytime}
@@ -165,9 +165,7 @@ const Booking = () => {
                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition"
                 required
               >
-                <option value="" disabled>
-                  Select time
-                </option>
+                <option value="" disabled>Select time</option>
                 <option value="09:00 AM">09:00 AM</option>
                 <option value="11:30 AM">11:30 AM</option>
                 <option value="03:00 PM">03:00 PM</option>

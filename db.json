@@ -1,48 +1,12 @@
 {
   "appointments": [
     {
-      "id": "3e68",
-      "myname": "Hari Sharna",
-      "myemail": "bankeyaditya7@gmail.com",
-      "mydoctor": "Dr James Amen",
-      "mydate": "2026-02-26",
-      "mytime": "03:00 PM",
-      "loggedUser": "t@gmail.com"
-    },
-    {
-      "id": "27ad",
-      "myname": "Aditya Gurjar",
-      "myemail": "bankeyaditya7@gmail.com",
-      "mydoctor": "Dr Darin Elder",
-      "mydate": "2026-02-26",
-      "mytime": "03:00 PM",
-      "loggedUser": "t@gmail.com"
-    },
-    {
-      "id": "4ae7",
-      "myname": "Sajan singh",
-      "myemail": "sajansingh@gmail.com",
-      "mydoctor": "Dr James Amen",
-      "mydate": "2026-02-20",
-      "mytime": "11:30 AM",
-      "loggedUser": "ba@gmail.com"
-    },
-    {
-      "id": "dd93",
+      "id": "049d",
       "myname": "Aditya Bankey",
-      "myemail": "bankeyaditya7@gmail.com",
+      "myemail": "bankey7@gmail.com",
       "mydoctor": "Dr Rohit Mehta",
-      "mydate": "2026-02-13",
-      "mytime": "09:00 AM",
-      "loggedUser": "johndoe@gmail.com"
-    },
-    {
-      "id": "f2ed",
-      "myname": "Hari Sharma",
-      "myemail": "hs@gmail.com",
-      "mydoctor": "Dr Neha Gupta",
-      "mydate": "2026-02-19",
-      "mytime": "03:00 PM",
+      "mydate": "2026-02-18",
+      "mytime": "11:30 AM",
       "loggedUser": "sajansingh@gmail.com"
     }
   ]
